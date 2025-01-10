@@ -26,7 +26,7 @@ spec:
       served: true
       storage: true
       subresources:
-        status: { }
+        status: {}
       schema:
         openAPIV3Schema:
           type: object
@@ -48,6 +48,15 @@ spec:
                   required:
                     - url
                   properties:
+                    CACerts:
+                      description: CACerts is the Certification Authority (CA) certificates in PEM format according to https://www.rfc-editor.org/rfc/rfc7468.
+                      type: string
+                    audience:
+                      description: Audience is the OIDC audience for this address.
+                      type: string
+                    name:
+                      description: Name is the name of the address.
+                      type: string
                     url:
                       type: string
                 annotations:
@@ -58,16 +67,14 @@ spec:
                   description: Conditions the latest available observations of a resource's current state.
                   type: array
                   items:
-                    description: 'Condition defines a readiness condition for a Knative resource. See: https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#typical-status-properties'
                     type: object
                     required:
-                      - status
                       - type
+                      - status
                     properties:
                       lastTransitionTime:
                         description: LastTransitionTime is the last time the condition transitioned from one status to another. We use VolatileTime in place of metav1.Time to exclude this from creating equality.Semantic differences (all other things held constant).
                         type: string
-                        format: date-time
                       message:
                         description: A human readable message indicating details about the transition.
                         type: string
@@ -102,8 +109,8 @@ spec:
     plural: addressableservices
     singular: addressableservice
     categories:
-    - all
-    - knative
+      - all
+      - knative
     shortNames:
-    - asvc
+      - asvc
   scope: Namespaced
